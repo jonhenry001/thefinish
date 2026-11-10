@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
-import hero from '../assets/hero.jpg';
+import hero from '../assets/studio.jpg';
 import detail from '../assets/detail.jpg';
 import workshop from '../assets/workshop.jpg';
 import interior from '../assets/interior.jpg';
@@ -11,6 +11,6 @@ const photos: Record<string, ImageMetadata> = { hero, detail, workshop, interior
 ---
 <section id="expertise" class="expertise section-pad">
   <SectionHeading number="02" label="OUR EXPERTISE"/>
-  <div class="section-top"><h2>CARE WITH<br/>INTENTION.</h2><p>Four disciplines. One considered finish.<br/>Explore the services behind the concept.</p></div>
+  <div class="section-top"><h2>THE CRAFT<br/>BEHIND THE GLOSS.</h2><p>From paint correction and ceramic coatings to protective film and careful interior detailing.</p></div>
   <div class="service-list">{services.map(s => <article class="service-row"><span class="service-number">/{s.number}</span><div class="service-photo"><Image src={photos[s.image]} alt={`Automotive demonstration imagery for ${s.title.toLowerCase()}`} widths={[400, 650]} sizes="(max-width: 600px) 88vw, 24vw" format="webp" quality={75} loading="lazy"/></div><div class="service-copy"><h3>{s.title}</h3><p>{s.description}</p><span class="service-benefits">{s.benefits}</span></div><a class="circle-link" href="#contact" aria-label={`Explore website enquiries for ${s.title}`}><span aria-hidden="true">↗</span></a></article>)}</div>
 </section>

@@ -1,14 +1,14 @@
 ---
 import { Image, getImage } from 'astro:assets';
-import hero from '../assets/hero.jpg';
+import hero from '../assets/workshop.jpg';
 import interior from '../assets/interior.jpg';
-import workshop from '../assets/workshop.jpg';
+import workshop from '../assets/studio.jpg';
 import wheel from '../assets/wheel.jpg';
 import SectionHeading from './SectionHeading.astro';
 const works = [
- { image: hero, title: 'The shape of a reflection', category: 'EXTERIOR / FINISH STUDY', alt: 'Premium sports car exterior with sculpted bodywork' },
+ { image: hero, title: 'Correction, panel by panel', category: 'PAINT CORRECTION / PROCESS STUDY', alt: 'Detailer machine-polishing a vehicle panel' },
  { image: interior, title: 'Considered from within', category: 'INTERIOR / MATERIAL STUDY', alt: 'Carefully composed premium vehicle interior' },
- { image: workshop, title: 'Precision in the process', category: 'PAINT CORRECTION / CRAFT STUDY', alt: 'Machine polishing automotive paintwork' },
+ { image: workshop, title: 'A studio built for the finish', category: 'DETAILING SPACE / STUDIO STUDY', alt: 'A dark luxury car inside a geometric-lit detailing studio' },
  { image: wheel, title: 'Nothing overlooked', category: 'DETAILING / DETAIL STUDY', alt: 'Close-up study of a performance wheel' }
 ];
 const gallery = await Promise.all(works.map(async w => ({...w, full: (await getImage({src:w.image,width:1800,format:'webp',quality:85})).src})));
