@@ -27,3 +27,4 @@ TypeScript and static production build pass. Browser checks verified mobile menu
 The site deliberately uses `noindex, nofollow`. A Lighthouse SEO audit may therefore flag indexing even though exclusion is intentional.
 
 Service guidance was cross-checked against [3M's official PPF FAQ](https://multimedia.3m.com/mws/media/2398297O/3m-paint-protection-film-faq.pdf); no affiliation or product-specific warranty is claimed. Tailwind integration follows [the official Astro installation guide](https://tailwindcss.com/docs/installation/framework-guides/astro).
+"# thefinish" 
