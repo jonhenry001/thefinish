@@ -1,0 +1,5 @@
+---
+import { processSteps } from '../data/site';
+import SectionHeading from './SectionHeading.astro';
+---
+<section id="process" class="process section-pad"><SectionHeading number="05" label="THE APPROACH"/><div class="process-layout"><div><h2>NO SHORTCUTS.<br/><span class="muted-heading">JUST CRAFT.</span></h2><p class="process-intro">A thoughtful finish is the result of a thoughtful process. Every stage has its purpose.</p><span class="small-note">THE PROPOSED STUDIO EXPERIENCE</span></div><ol class="process-list">{processSteps.map((step,i) => <li><span>0{i+1}</span><div><h3>{step.title}</h3><p>{step.text}</p></div></li>)}</ol></div></section>

@@ -1,0 +1,24 @@
+---
+import { Image } from 'astro:assets';
+import detail from '../assets/detail.jpg';
+import SectionHeading from './SectionHeading.astro';
+---
+<section class="comparison-section section-pad" aria-labelledby="comparison-title">
+  <SectionHeading number="03" label="A DIFFERENCE YOU CAN SEE"/>
+  <div class="section-top"><h2 id="comparison-title">CLARITY.<br/>REVEALED.</h2><div><span class="pill">ILLUSTRATIVE COMPARISON</span><p>One image. Two visual treatments.<br/>Drag to explore the difference in clarity.</p></div></div>
+  <div class="comparison" style="--split: 50%">
+    <Image src={detail} alt="Original automotive finish photograph" widths={[640, 1000, 1600]} sizes="90vw" format="webp" quality={80} loading="lazy" class="compare-image"/>
+    <div class="compare-before" aria-hidden="true"><Image src={detail} alt="" widths={[640, 1000, 1600]} sizes="90vw" format="webp" quality={80} loading="lazy" class="compare-image"/></div>
+    <span class="compare-label before-label">MUTED TREATMENT</span><span class="compare-label after-label">ORIGINAL IMAGE</span>
+    <div class="compare-line" aria-hidden="true"><span>←<i></i>→</span></div>
+    <input type="range" min="0" max="100" value="50" aria-label="Illustrative finish comparison: percentage of muted image shown" aria-valuetext="50 percent muted image shown" class="compare-range"/>
+  </div>
+  <div class="compare-caption"><span>DRAG TO COMPARE <span aria-hidden="true">↔</span></span><p>A visual demonstration using a filtered copy of the same photograph. This is not an actual before-and-after result. Use arrow keys when the slider is focused.</p></div>
+</section>
+<script>
+  const range = document.querySelector<HTMLInputElement>('.compare-range')!;
+  range.addEventListener('input', () => {
+    (range.closest('.comparison') as HTMLElement).style.setProperty('--split', `${range.value}%`);
+    range.setAttribute('aria-valuetext', `${range.value} percent muted image shown`);
+  });
+</script>

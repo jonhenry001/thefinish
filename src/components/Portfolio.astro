@@ -1,0 +1,47 @@
+---
+import { Image, getImage } from 'astro:assets';
+import hero from '../assets/hero.jpg';
+import interior from '../assets/interior.jpg';
+import workshop from '../assets/workshop.jpg';
+import wheel from '../assets/wheel.jpg';
+import SectionHeading from './SectionHeading.astro';
+const works = [
+ { image: hero, title: 'The shape of a reflection', category: 'EXTERIOR / FINISH STUDY', alt: 'Premium sports car exterior with sculpted bodywork' },
+ { image: interior, title: 'Considered from within', category: 'INTERIOR / MATERIAL STUDY', alt: 'Carefully composed premium vehicle interior' },
+ { image: workshop, title: 'Precision in the process', category: 'PAINT CORRECTION / CRAFT STUDY', alt: 'Machine polishing automotive paintwork' },
+ { image: wheel, title: 'Nothing overlooked', category: 'DETAILING / DETAIL STUDY', alt: 'Close-up study of a performance wheel' }
+];
+const gallery = await Promise.all(works.map(async w => ({...w, full: (await getImage({src:w.image,width:1800,format:'webp',quality:85})).src})));
+---
+<section id="work" class="portfolio section-pad light-section">
+  <SectionHeading number="04" label="SELECTED PERSPECTIVES"/>
+  <div class="section-top"><h2>THE WORK.<br/>IN FOCUS.</h2><p>A curated visual moodboard.<br/>Licensed demonstration imagery, not client work.</p></div>
+  <div class="work-grid">{gallery.map((w,i) => <figure class={`work-item work-${i}`}><a href={w.full} class="gallery-open" data-gallery-index={i} data-full={w.full} data-caption={w.title} data-alt={w.alt} aria-label={`View ${w.title} in full screen`}><Image src={w.image} alt={w.alt} widths={[450, 750, 1100]} sizes="(max-width: 700px) 90vw, 50vw" format="webp" quality={78} loading="lazy"/><span class="gallery-expand" aria-hidden="true">↗</span></a><figcaption><span class="eyebrow">{w.category}</span><h3>{w.title}</h3><span class="work-count">0{i+1}</span></figcaption></figure>)}</div>
+  <div class="portfolio-foot"><span>AN EYE FOR THE EXTRAORDINARY.</span><span>FOUR STUDIES / ONE PHILOSOPHY</span></div>
+</section>
+<dialog class="lightbox" aria-label="Demonstration photography gallery"><div class="lightbox-top"><span>THE FINISH / VISUAL STUDIES</span><button type="button" class="lightbox-close" aria-label="Close image viewer">Close <span aria-hidden="true">×</span></button></div><div class="lightbox-stage"><button type="button" class="lightbox-prev" aria-label="Previous image">←</button><img class="lightbox-image" alt=""/><button type="button" class="lightbox-next" aria-label="Next image">→</button></div><div class="lightbox-bottom"><p class="lightbox-caption" aria-live="polite"></p><span class="lightbox-count"></span></div></dialog>
+<script>
+  const links = [...document.querySelectorAll<HTMLAnchorElement>('.gallery-open')];
+  const dialog = document.querySelector<HTMLDialogElement>('.lightbox')!;
+  const img = dialog.querySelector<HTMLImageElement>('.lightbox-image')!;
+  let current = 0;
+  let opener: HTMLAnchorElement | null = null;
+  function show(index: number) {
+    current = (index + links.length) % links.length;
+    const data = links[current].dataset;
+    img.src = data.full!; img.alt = data.alt!;
+    dialog.querySelector('.lightbox-caption')!.textContent = data.caption!;
+    dialog.querySelector('.lightbox-count')!.textContent = `${current + 1} / ${links.length} — DEMO IMAGERY`;
+  }
+  links.forEach((link, i) => link.addEventListener('click', e => {
+    e.preventDefault(); opener = link; show(i); dialog.showModal(); document.body.classList.add('lightbox-open');
+  }));
+  dialog.querySelector('.lightbox-close')!.addEventListener('click', () => dialog.close());
+  dialog.querySelector('.lightbox-prev')!.addEventListener('click', () => show(current - 1));
+  dialog.querySelector('.lightbox-next')!.addEventListener('click', () => show(current + 1));
+  dialog.addEventListener('keydown', e => {
+    if(e.key === 'ArrowRight') {e.preventDefault();show(current + 1);}
+    if(e.key === 'ArrowLeft') {e.preventDefault();show(current - 1);}
+  });
+  dialog.addEventListener('close', () => {document.body.classList.remove('lightbox-open');opener?.focus();});
+</script>

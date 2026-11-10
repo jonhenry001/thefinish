@@ -1,0 +1,10 @@
+---
+import SectionHeading from './SectionHeading.astro';
+const rows = [
+ ['The purpose', 'A thin surface coating that supports gloss, water repellency, and easier cleaning.', 'A transparent film that provides a physical barrier over painted surfaces.'],
+ ['The distinction', 'Helps with routine care; does not prevent stone chips or make paint scratch-proof.', 'Helps reduce stone-chip damage and light abrasion; does not prevent every impact or scratch.'],
+ ['A typical use', 'For drivers who value a glossy finish and simpler regular maintenance.', 'For vulnerable areas such as front bumpers, bonnets, and mirror caps, or wider coverage.'],
+ ['Looking after it', 'Wash gently with suitable products. Follow the coating maker’s care guidance.', 'Wash gently, take care around film edges, and follow the film maker’s guidance.']
+];
+---
+<section class="protection section-pad light-section"><SectionHeading number="06" label="KNOW YOUR PROTECTION"/><div class="section-top"><h2>DIFFERENT ROLES.<br/>A SHARED PURPOSE.</h2><p>The right protection starts with understanding.<br/>A simple guide to two different approaches.</p></div><div class="protection-table"><table><caption class="sr-only">Ceramic coating and paint protection film comparison</caption><thead><tr><th scope="col">A CLOSER LOOK</th><th scope="col">Ceramic coating</th><th scope="col">Paint protection film</th></tr></thead><tbody>{rows.map(([label,coating,film]) => <tr><th scope="row">{label}</th><td>{coating}</td><td>{film}</td></tr>)}</tbody></table></div><p class="protection-note">These treatments can complement each other when the products and installation are compatible. Suitability depends on the paint, vehicle, and chosen system. General guidance only; no product partnership is implied.</p></section>

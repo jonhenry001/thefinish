@@ -1,0 +1,18 @@
+---
+import '../styles/global.css';
+import { site } from '../data/site';
+import { getImage } from 'astro:assets';
+import hero from '../assets/hero.jpg';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import Introduction from '../components/Introduction.astro';
+import Services from '../components/Services.astro';
+import BeforeAfter from '../components/BeforeAfter.astro';
+import Portfolio from '../components/Portfolio.astro';
+import Process from '../components/Process.astro';
+import Protection from '../components/Protection.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+import Footer from '../components/Footer.astro';
+const social = await getImage({src:hero,width:1200,height:630,fit:'cover',format:'jpg'});
+---
+<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>{site.title}</title><meta name="description" content={site.description}/><meta name="robots" content={site.noindex ? 'noindex, nofollow' : 'index, follow'}/><meta name="theme-color" content="#101112"/><link rel="icon" href="/favicon.svg" type="image/svg+xml"/><link rel="canonical" href={Astro.site}/><meta property="og:type" content="website"/><meta property="og:title" content={site.title}/><meta property="og:description" content={site.description}/><meta property="og:url" content={Astro.site}/><meta property="og:image" content={new URL(social.src, Astro.site)}/><meta property="og:image:alt" content="THE FINISH automotive portfolio concept"/><meta name="twitter:card" content="summary_large_image"/></head><body><Navbar/><main id="main"><Hero/><Introduction/><Services/><BeforeAfter/><Portfolio/><Process/><Protection/><ContactCTA/></main><Footer/></body></html>

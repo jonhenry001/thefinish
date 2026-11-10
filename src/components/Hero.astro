@@ -1,0 +1,10 @@
+---
+import { Image } from 'astro:assets';
+import hero from '../assets/hero.jpg';
+---
+<section id="home" class="hero" aria-labelledby="hero-title">
+  <Image src={hero} alt="Sculpted bodywork and polished reflections on a premium sports car" widths={[640, 960, 1440, 1920]} sizes="100vw" format="webp" quality={80} loading="eager" fetchpriority="high" class="hero-image" />
+  <div class="hero-shade"></div>
+  <div class="hero-heading"><div class="eyebrow hero-kicker"><span>AUTOMOTIVE CARE, CONSIDERED.</span><span>LUCKNOW, INDIA</span></div><h1 id="hero-title">PERFECTION IS<br/>IN THE <span class="outline-text">DETAILS.</span></h1></div>
+  <div class="hero-bottom"><div><p>Precision detailing. Exceptional finishes.<br/>An uncompromising approach to automotive care.</p><a class="button button-light" href="#expertise">Explore services <span aria-hidden="true">↗</span></a></div><a class="scroll-cue" href="#introduction"><span>SCROLL TO DISCOVER</span><span class="scroll-line" aria-hidden="true">↓</span></a><span class="hero-index">01 / THE FINISH</span></div>
+</section>

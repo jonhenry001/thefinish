@@ -1,0 +1,35 @@
+---
+import { navigation } from '../data/site';
+---
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="demo-banner"><span class="demo-dot"></span> DEMO WEBSITE <span class="banner-divider">/</span><span>A fictional studio. A real attention to detail.</span></div>
+<header class="site-header">
+  <a href="#home" class="wordmark" aria-label="THE FINISH home">THE FINISH<span class="wordmark-period">.</span></a>
+  <nav aria-label="Main navigation" class="desktop-nav">{navigation.map(([label, href]) => <a href={href}>{label}</a>)}</nav>
+  <a class="nav-cta" href="#work">Explore our work <span aria-hidden="true">↗</span></a>
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav"><span class="menu-label">Menu</span><span class="menu-lines" aria-hidden="true"></span></button>
+  <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation" inert>{navigation.map(([label, href], i) => <a href={href}><span>0{i + 1}</span>{label}<span aria-hidden="true">↗</span></a>)}<p>AUTOMOTIVE CARE STUDIO<br/>LUCKNOW, INDIA · PORTFOLIO CONCEPT</p></nav>
+</header>
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle')!;
+  const menu = document.querySelector<HTMLElement>('#mobile-nav')!;
+  const setMenu = (open: boolean) => {
+    toggle.setAttribute('aria-expanded', String(open));
+    menu.inert = !open;
+    menu.classList.toggle('is-open', open);
+    document.body.classList.toggle('menu-open', open);
+    toggle.querySelector('.menu-label')!.textContent = open ? 'Close' : 'Menu';
+  };
+  toggle.addEventListener('click', () => setMenu(toggle.getAttribute('aria-expanded') !== 'true'));
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+  document.addEventListener('keydown', e => {
+    if (toggle.getAttribute('aria-expanded') !== 'true') return;
+    if (e.key === 'Escape') { setMenu(false); toggle.focus(); }
+    if (e.key === 'Tab') {
+      const last = menu.querySelectorAll('a')[4];
+      if (e.shiftKey && document.activeElement === toggle) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); toggle.focus(); }
+    }
+  });
+  matchMedia('(min-width: 900px)').addEventListener('change', e => { if (e.matches) setMenu(false); });
+</script>
